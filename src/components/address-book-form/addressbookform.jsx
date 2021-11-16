@@ -6,8 +6,8 @@ import { v1 as uuidv1 } from 'uuid';
 import AddressBookService from '../../services/address-book-service';
 
 var addressBookService=new AddressBookService();
-const AddressBookForm = (props) => {
 
+const AddressBookForm = (props) => {
     let initialValue = {
         name: '',
         phoneNumber: '',
@@ -80,7 +80,7 @@ const AddressBookForm = (props) => {
       
       const save = async(event)=>{
         event.preventDefault();
-        console.log("save");
+        alert("inside save")
       
         if(await validData())
         {
@@ -95,7 +95,7 @@ const AddressBookForm = (props) => {
             address:formValue.address,
             city:formValue.city,
             state:formValue.state,
-            id:formValue.id,
+            id:uuidv1(),
             zip:formValue.zip,
         }
       
@@ -116,44 +116,44 @@ const AddressBookForm = (props) => {
 
     return (
         <div className="body">
-        <header class="header header-content">
-            <div class="logo-content">
+        <header className="header header-content">
+            <div className="logo-content">
                 <img src="assets/logo.png" alt="logo"/>
                 <div>
-                    <span class="address-text">ADDRESS</span><br />
-                    <span class="address-text book-text">BOOK</span>
+                    <span className="address-text">ADDRESS</span><br />
+                    <span className="address-text book-text">BOOK</span>
                 </div>
             </div>
         </header>
-            <div class="form-content">
-                <form action="#" class="form" autocomplete="off" onsubmit="save(event)" onreset="resetForm()">
-                    <div class="form-head">
-                        <h3 class="head-text">PERSON ADDRESS FORM</h3>
-                        <div class="cancel-button">
+            <div className="form-content">
+                <form action="#" className="form" autoComplete="off" onSubmit={save} onReset={reset}>
+                    <div className="form-head">
+                        <h3 className="head-text">PERSON ADDRESS FORM</h3>
+                        <div className="cancel-button">
                             <Link to="/"><img src="assets/cross.png"/></Link>
                         </div>
                     </div>
     
-                    <div class="form-body">
-                        <div class="row-content">
-                            <label for="name" class="label text">Full Name</label>
-                            <input type="text" class="input" id="name" name="name" value={formValue.name} onChange={changeValue} placeholder="Your name.."required/>
-                            <error-output for="name" class="name-error" id="name-error"></error-output>
+                    <div className="form-body">
+                        <div className="row-content">
+                            <label htmlFor="name" className="label text">Full Name</label>
+                            <input type="text" className="input" id="name" name="name" value={formValue.name} onChange={changeValue} placeholder="Your name.."required/>
+                            
                         </div>
-                        <div class="row-content">
-                            <label for="phone-number" class="label text">Phone Number</label>
-                            <input type="tel" class="input" id="phoneNumber" name="phoneNumber" value={formValue.phoneNumber} onChange={changeValue} required/>
-                            <error-output for="tel" class="tel-error" id="tel-error"></error-output>
+                        <div className="row-content">
+                            <label htmlFor="phone-number" className="label text">Phone Number</label>
+                            <input type="tel" className="input" id="phoneNumber" name="phoneNumber" value={formValue.phoneNumber} onChange={changeValue} required/>
+                            
                         </div>
-                        <div class="row-content">
-                            <label for="address" class="text">Address</label>
+                        <div className="row-content">
+                            <label htmlFor="address" className="text">Address</label>
                             <textarea name="address" id="address" cols="50" rows="6" value={formValue.address} onChange={changeValue} required></textarea>
-                            <error-output for="address" class="address-error" id="address-error"></error-output>
+    
                         </div>
-                        <div class="row-content inner-rows">
-                            <div class="columns-content">
-                                <label for="city" class="label text">City</label>
-                                <select name="city" id="city" class="input" onChange={changeValue}>
+                        <div className="row-content inner-rows">
+                            <div className="columns-content">
+                                <label htmlFor="city" className="label text">City</label>
+                                <select name="city" id="city" className="input" onChange={changeValue}>
                                     <option value="0">Select City</option>
                                     <option value="Bangalore">Bangalore</option>
                                     <option value="Mumbai">Mumbai</option>
@@ -162,9 +162,9 @@ const AddressBookForm = (props) => {
                                     <option value="Mysore">Mysore</option>
                                 </select>
                             </div>
-                            <div class="columns-content">
-                                <label for="state" class="text label">State</label>
-                                <select name="state" id="state" class="input" onChange={changeValue}>
+                            <div className="columns-content">
+                                <label htmlFor="state" className="text label">State</label>
+                                <select name="state" id="state" className="input" onChange={changeValue}>
                                     <option value="0">Select State</option>
                                     <option value="Karnataka">Karnataka</option>
                                     <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -176,17 +176,17 @@ const AddressBookForm = (props) => {
                                     <option value="West Bengal">West Bengal</option>
                                 </select>
                             </div>
-                            <div class="columns-content zip">
-                                <label for="zip" class="text label">Zip Code</label>
-                                <input type="tel" class="input" id="zip" name="zip" maxlength="999999" 
+                            <div className="columns-content zip">
+                                <label htmlFor="zip" className="text label">Zip Code</label>
+                                <input type="tel" className="input" id="zip" name="zip"  
                                 value={formValue.zip} onChange={changeValue} required/>
-                                <error-output id="zip-error" class="zip-error" for="zip"></error-output>
+                                
                             </div>
                         </div>
-                        <div class="buttonParent">
-                            <div class="submit-reset">
-                                <button type="submit" class="submitButton button" id="submitButton" >{formValue.isUpdate? 'Update' : 'Submit'}</button>
-                                <button type="reset" class="resetButton button" id="resetButton" onreset="resetForm()">Reset</button>
+                        <div className="buttonParent">
+                            <div className="submit-reset">
+                                <button type="submit" className="submitButton button" id="submitButton" >{formValue.isUpdate? 'Update' : 'Submit'}</button>
+                                <button type="reset" className="resetButton button" id="resetButton" >Reset</button>
                             </div>
                         </div>   
                        
