@@ -2,35 +2,58 @@ import React from 'react';
 
 import './addressbookhome.scss';
 import {Link} from 'react-router-dom';
+import AddressBookService from '../../services/address-book-service';
+import Display from './display';
+
+var addressBookService = new AddressBookService();  
 
 
 class AddressBookHome extends React.Component {
 
+
+    constructor(props) {
+        super(props);
+        this.state = {
+          contactsArray: []
+        };
+          
+      }
+    
+     getAllContactsList = () => {
+        console.log("inside getAllContactsList");
+        addressBookService.getAllContacts()
+        .then(responseData => {
+          console.log("Data received after GET Call " + responseData.data);
+          this.setState({contactsArray: responseData.data});
+        }).catch(error => {
+          console.log("Error : " +JSON.stringify(error));
+        })
+      }
+
   render () {
     return (
-        <div classname="body">
-        <header class="header header-content">
-            <div class="logo-content">
+        <div className="body" onLoad={this.getAllContactsList}>
+        <header className="header header-content">
+            <div className="logo-content">
                 <img src="assets/logo.png" alt="logo"/>
                 <div>
-                    <span class="address-text">ADDRESS</span><br />
-                    <span class="address-text book-text">BOOK</span>
+                    <span className="address-text">ADDRESS</span><br />
+                    <span className="address-text book-text">BOOK</span>
                 </div>
             </div>
         </header>
-        <div class="main-content">
-            <div class="main-header-content">
-                <div class="addressbook-detail-text">
+        <div className="main-content">
+            <div className="main-header-content">
+                <div className="addressbook-detail-text">
                     Person Details
-                    <div class="contact-count"></div>
+                    <div className="contact-count">{this.state.contactsArray.length}</div>
                 </div>
                 <Link to="form" className="add-button">+ Add Person</Link>
             </div>
         </div>
-        <div class="main-content">
-            <div class="table-main">
-                <table id="table-display" class="table">
-                </table>
+        <div className="main-content">
+            <div className="table-main">
+                <Display contactsArray = {this.state.contactsArray} />
             </div>
         </div>
     </div>
