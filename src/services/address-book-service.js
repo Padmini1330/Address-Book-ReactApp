@@ -10,4 +10,7 @@ export default class AddressBookService {
     getAllContacts() {
         return AxiosService.getService(`${this.baseUrl}addressBook`);
     }
+    deleteContact(data) {
+        return AxiosService.deleteService(`${this.baseUrl}addressBook/`+data);
+    }
 }
