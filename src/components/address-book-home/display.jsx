@@ -2,10 +2,21 @@ import React from 'react';
 import './addressbookhome.scss';
 import deleteIcon from '../../assets/icons/delete.svg';
 import editIcon from '../../assets/icons/edit.svg';
+import AddressBookService from '../../services/address-book-service';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
+var addressBookService=new AddressBookService();
 const Display = (props) => {
   
+
+    const remove= (id) =>{
+        addressBookService.deleteContact(id);
+        window.location.reload();
+    } 
+    
+    const edit = (id) => {
+    }
+
   return (
     <table id="display" className="table">
       <tbody>
@@ -36,10 +47,6 @@ const Display = (props) => {
     </table>
   )
 }
-const remove = (id) => {
-}
 
-const edit = (id) => {
-}
 
 export default Display;
