@@ -1,0 +1,31 @@
+{
+  "addressBook": [
+    {
+      "name": "Padmini",
+      "phoneNumber": "9876543211",
+      "address": "bangalore",
+      "city": "Bangalore",
+      "state": "Karnataka",
+      "id": "a6f2f7e0-46c7-11ec-b3c0-9556963ecc88",
+      "zip": "560108"
+    },
+    {
+      "name": "Sheldon",
+      "phoneNumber": "8888888888",
+      "address": "jaynagar",
+      "city": "Bangalore",
+      "state": "Karnataka",
+      "id": "d2b81b80-46c7-11ec-985e-b9de46ea9b3a",
+      "zip": "121212"
+    },
+    {
+      "name": "Amy",
+      "phoneNumber": "1111111111",
+      "address": "jpnagar",
+      "city": "Mumbai",
+      "state": "Uttarakhand",
+      "id": "e905cb30-46c7-11ec-997a-a7a0500d1469",
+      "zip": "123321"
+    }
+  ]
+}
