@@ -8,6 +8,24 @@
       "state": "Karnataka",
       "id": "a6f2f7e0-46c7-11ec-b3c0-9556963ecc88",
       "zip": "560108"
+    },
+    {
+      "name": "VinayHiremath",
+      "phoneNumber": "1111111111",
+      "address": "abcd",
+      "city": "Bangalore",
+      "state": "Karnataka",
+      "zip": "121213",
+      "id": "saV1ojs"
+    },
+    {
+      "name": "Alia",
+      "phoneNumber": "1",
+      "address": "a",
+      "city": "Bangalore",
+      "state": "Goa",
+      "zip": "1212121",
+      "id": "Jov01XU"
     }
   ]
 }
