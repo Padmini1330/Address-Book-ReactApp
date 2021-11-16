@@ -4,5 +4,10 @@ class AxiosService{
     {
         return axios.post(url,payload,tokenRequired && httpOptions);
     }
+
+    getService(url='',payload=null,tokenRequired=false,httpOptions=null)
+    {
+        return axios.get(url,payload,tokenRequired && httpOptions);
+    }
 }
 module.exports = new AxiosService();
