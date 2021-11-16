@@ -252,17 +252,17 @@ select {
 {
     .form-head ,.head-text
     {
-        display: flex !important;
-        flex-direction: row !important;
-        font-size: 12px !important;
+        display: flex;
+        flex-direction: row ;
+        font-size: 12px;
     }
     .resetButton,.submitButton
     {
-        margin-left: 40% !important;
+        margin-left: 40%;
     }
     .inner-rows
     {
-        flex-direction: column !important;
+        flex-direction: column;
         width: max-content;
     }
 
