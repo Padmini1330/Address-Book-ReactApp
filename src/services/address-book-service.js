@@ -4,7 +4,6 @@ import AxiosService from './axios-service'
 export default class AddressBookService {
     baseUrl = config.baseUrl;
     addContact(data) {
-        alert("inside service")
         return AxiosService.postService(`${this.baseUrl}addressBook`, data);
     }
     getAllContacts() {
@@ -13,4 +12,11 @@ export default class AddressBookService {
     deleteContact(data) {
         return AxiosService.deleteService(`${this.baseUrl}addressBook/`+data);
     }
+    getContact(id) {
+        return AxiosService.getService(`${this.baseUrl}addressBook/${id}`);
+    }
+    updateContact(data,id) {
+        return AxiosService.putService(`${this.baseUrl}addressBook/${id}`, data);
+    }
+
 }
