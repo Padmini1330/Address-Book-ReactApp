@@ -1,14 +1,10 @@
-import config from "../config/config";
-import React, { Component } from 'react'
+import config from '../config/config';
+import AxiosService from './axios-service'
 
-const axios=require('axios').default;
-
-export default class AddressBookService{
-
-    baseUrl=config.baseUrl;
-    addContact(data)
-    {
-        console.log(data)
-        return axios.post(`${this.baseUrl}contact`,data);
+export default class AddressBookService {
+    baseUrl = config.baseUrl;
+    addContact(data) {
+        alert("inside service --- add contact")
+        return AxiosService.postService(`${this.baseUrl}addressBook`, data);
     }
 }
