@@ -1,13 +1,15 @@
-import React, { useState, userEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './addressbookform.scss';
 
 import { useParams, Link, withRouter } from 'react-router-dom';
 import { v1 as uuidv1 } from 'uuid';
 import AddressBookService from '../../services/address-book-service';
 
-var addressBookService=new AddressBookService();
-
 const AddressBookForm = (props) => {
+
+    const { id } = useParams()
+    //alert(id)
+
     let initialValue = {
         name: '',
         phoneNumber: '',
@@ -17,7 +19,6 @@ const AddressBookForm = (props) => {
         zip:'',
         id: '',      
         isUpdate: false,
-        isError: false,
         error: {
           name: '',
           phoneNumber: '',
@@ -28,6 +29,8 @@ const AddressBookForm = (props) => {
         }
       }
           
+      const addressBookService=new AddressBookService();
+
       const [formValue,setForm] = useState(initialValue);
       
       const changeValue=(event)=>{
@@ -78,6 +81,28 @@ const AddressBookForm = (props) => {
           return isError;
       }
       
+
+      useEffect(()=>{
+
+        if(id) {
+            formValue.isUpdate = true
+            addressBookService.getContact(id).then(contact => {
+                setForm({
+                    ...formValue,
+                    name: contact.data.name,
+                    phoneNumber: contact.data.phoneNumber,
+                    address: contact.data.address,
+                    city: contact.data.city,
+                    state: contact.data.state,
+                    zip: contact.data.zip
+                });
+            }).catch(error => {
+                console.log(error)
+            })
+        }
+        
+      },[])
+
       const save = async(event)=>{
         event.preventDefault();
         alert("inside save")
@@ -87,26 +112,43 @@ const AddressBookForm = (props) => {
             console.log('error',formValue);
             return;
         }
-      
-        let object ={
-      
-            name:formValue.name,
-            phoneNumber:formValue.phoneNumber,
-            address:formValue.address,
-            city:formValue.city,
-            state:formValue.state,
-            id:uuidv1(),
-            zip:formValue.zip,
+         
+        if(formValue.isUpdate)
+        {
+        let object = {
+
+                name:formValue.name,
+                phoneNumber:formValue.phoneNumber,
+                address:formValue.address,
+                city:formValue.city,
+                state:formValue.state,
+                zip:formValue.zip,
+            }
+            addressBookService.updateContact(object,id);
         }
-      
-        addressBookService.addContact(object).then(data=>{
-            console.log("data added");
-            alert(data);
-        }).catch(err =>{
-            console.log("err while Add");
-        })
-      
-      }
+        else
+        {
+                let object = {
+                    name:formValue.name,
+                    phoneNumber:formValue.phoneNumber,
+                    address:formValue.address,
+                    city:formValue.city,
+                    state:formValue.state,
+                    zip:formValue.zip,
+                }
+
+                addressBookService.addContact(object).then(data=>{
+                    console.log("Data added successfully!");
+                }).catch(err =>{
+                    console.log("Error while adding data");
+                })
+            }
+
+            window.location="http://localhost:3002/";
+            
+    }
+       
+
       const reset=()=>{
           setForm({
               ...initialValue,id:formValue.id,isUpdate:formValue.isUpdate
@@ -185,16 +227,15 @@ const AddressBookForm = (props) => {
                         </div>
                         <div className="buttonParent">
                             <div className="submit-reset">
-                                <button type="submit" className="submitButton button" id="submitButton" >{formValue.isUpdate? 'Update' : 'Submit'}</button>
+                                <button type="submit" className="submitButton button" id="submitButton" onClick={save}>{formValue.isUpdate? 'Update' : 'Submit'}</button>
                                 <button type="reset" className="resetButton button" id="resetButton" >Reset</button>
                             </div>
                         </div>   
-                       
                     </div>
                 </form>
             </div>
         </div>
-    )
+    );
   }
 
 export default AddressBookForm;
