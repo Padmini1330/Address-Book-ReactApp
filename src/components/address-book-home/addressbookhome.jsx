@@ -24,7 +24,7 @@ class AddressBookHome extends React.Component {
         addressBookService.getAllContacts()
         .then(responseData => {
           console.log("Data received after GET Call " + responseData.data);
-          this.setState({contactsArray: responseData.data});
+          this.setState({contactsArray: responseData.data.data});
         }).catch(error => {
           console.log("Error : " +JSON.stringify(error));
         })

@@ -32,14 +32,14 @@ const Display = (props) => {
         {
             props.contactsArray && props.contactsArray.map((contact,index) => (
               <tr key={index}>
-                  <td>{contact.name}</td>
+                  <td>{contact.firstName}</td>
                   <td>{contact.phoneNumber}</td>
-                  <td>{contact.address}</td>
+                  <td>{contact.lastName}</td>
                   <td>{contact.city}</td>
                   <td>{contact.state}</td>
-                  <td>{contact.zip}</td>
-                  <td><img src={deleteIcon} onClick={() => remove(contact.id)} alt="delete" />
-                      <Link to={"/form/" + (contact.id)}> 
+                  <td>{contact.zipCode}</td>
+                  <td><img src={deleteIcon} onClick={() => remove(contact.contactId)} alt="delete" />
+                      <Link to={"/form/" + (contact.contactId)}> 
                       <img src={editIcon} alt="update" />
                       </Link>
                       </td>
